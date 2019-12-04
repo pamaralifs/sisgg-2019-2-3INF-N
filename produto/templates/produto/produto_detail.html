@@ -1,0 +1,27 @@
+{% extends 'core/base_menu.html' %}
+{% block conteudo %}
+<div class="d-flex justify-content-center mb-5"></div>
+    <div class="card-produto-detalhe">
+        <div class="card-header">
+            <h3>G & G COTAÇÕES</h3>
+            <h4>Produto</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Código:</strong> {{ produto.id | stringformat:'04d' }}</p>
+            <p><strong>Nome:</strong> {{ produto.nome }}</p>
+            <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+            <p><strong>Preço:</strong> {{produto.preco}}</p>
+            <p><strong>Fornecedor:</strong> {{produto.fornecedor}}</p>
+            <a href="{% url 'produto:produto_delete' produto.id %}" class="btn btn-danger"><i
+                    class="far fa-trash-alt"></i> Excluir</a>
+            <a href="{% url 'produto:produto_update' produto.id %}" class="btn btn-warning">
+                <i class="far fa-edit"></i> Alterar</a>
+            <a href="javascript:void(0)" onClick="history.go(-1); return false;" class="btn btn-success">
+            <i class="far fa-caret-square-left"></i> Voltar</a>
+            <!-- <a href="{% url 'produto:produto_read' %}" class="btn btn-success">
+                <i class="fas fa-search"></i>Consultar</a> -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+

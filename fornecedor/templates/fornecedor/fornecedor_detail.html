@@ -1,0 +1,26 @@
+{% extends 'core/base_menu.html' %}
+{% block conteudo %}
+<div class="d-flex justify-content-center mb-5"></div>
+    <div class="card-fornecedor-detalhe">
+        <div class="card-header">
+            <h3>G & G COTAÇÕES</h3>
+            <h4>Fornecedor</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Código:</strong> {{ fornecedor.id | stringformat:'04d' }}</p>
+            <p><strong>Nome/Razão Social:</strong> {{ fornecedor.nome }}</p>
+            <p><strong>CNPJ</strong>: {{ fornecedor.cnpj }}</p>
+            <p><strong>Telefone:</strong> ({{fornecedor.ddd_telefone}}) {{fornecedor.telefone}}</p>
+            <a href="{% url 'fornecedor:fornecedor_delete' fornecedor.id %}" class="btn btn-danger"><i
+                    class="far fa-trash-alt"></i> Excluir</a>
+            <a href="{% url 'fornecedor:fornecedor_update' fornecedor.id %}" class="btn btn-warning">
+                <i class="far fa-edit"></i> Alterar</a>
+            <a href="javascript:void(0)" onClick="history.go(-1); return false;" class="btn btn-success">
+            <i class="far fa-caret-square-left"></i> Voltar</a>
+            <!-- <a href="{% url 'fornecedor:fornecedor_read' %}" class="btn btn-success">
+                <i class="fas fa-search"></i>Consultar</a> -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+

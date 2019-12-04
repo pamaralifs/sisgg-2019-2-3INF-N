@@ -1,0 +1,80 @@
+{% extends 'core/base_menu.html' %}
+{% load crispy_forms_tags %}
+{% block conteudo %}
+<div class="d-flex justify-content-center mb-5"></div>
+    <div class="card-produto">
+        <div class="card-header">
+            <h3>G & G COTAÇÕES</h3>
+            <h4>Produto</h4>
+        </div>
+        <div class="card-body">
+            <form id="formExemplo" data-toggle="validator" role="form" action="." method="get">
+              {% csrf_token %}
+              <div class="form-group">
+                  {{ form.nome|as_crispy_field }}
+              </div>
+              <div class="form-group">
+                  <input type="radio" name="modo_busca" id="inicia" value="1" checked="checked">
+                  <label for="inicia" class="control-label">Inicia com &nbsp;&nbsp;</label>
+                  <input type="radio" name="modo_busca" id="contem" value="2">
+                  <label for="contem" class="control-label">Contém &nbsp;&nbsp; </label>
+                  <input type="radio" name="modo_busca" id="termina" value="3">
+                  <label for="termina" class="control-label">Termina com</label>
+              </div>    
+              <div class="form-group">
+                  <a href="{% url 'produto:produto_create' %}" class="btn btn-warning"><i class="far fa-file"></i> Novo</a>
+                  <button type="submit" class="btn btn-warning"><i class="fas fa-search"></i> Pesquisar</button>
+              </div>
+              <div class="card-footer form-group">
+                  {% if primeira_vez %}
+                    <p>Cadastre um novo produto ou faça uma nova consulta! (Nenhum item pesquisado)</p>
+                  {% else %}
+                    <p>
+                        Total de registros: {{ object_list|length }} registro{{ object_list|pluralize }}
+                        retornado{{ object_list|pluralize }} na pesquisa.
+                    </p>
+                  {% endif %}
+              </div>         
+            </form>
+        </div>
+    </div>
+    <div style="color:#FFC312">
+        {% if object_list %}
+        <table class="table table-hover table-bordered table-sm table-responsive-sm">
+          <thead class="text-center">
+            <tr>
+              <th colspan="4">Produto{{ object_list|pluralize:'s' }}</th>
+            </tr>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for produto in object_list %}
+            <tr>
+              <td width="280">{{ produto.nome }}</td>
+              <td width="380">{{ produto.descricao }}</td>
+              <td width="80" align="right">{{ produto.preco }}</td>
+              <td>
+                <a href="{% url 'produto:produto_delete' produto.id %}" class="btn btn-danger"><i
+                    class="far fa-trash-alt"></i> Excluir</a>
+                <a href="{% url 'produto:produto_update' produto.id %}" class="btn btn-warning"><i
+                    class="far fa-edit"></i> Alterar</a>
+                <a href="{% url 'produto:produto_detail' produto.id %}" class="btn btn-success"><i
+                    class="fas fa-search-plus"></i>Visualizar</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+

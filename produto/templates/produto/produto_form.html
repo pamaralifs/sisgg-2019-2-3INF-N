@@ -1,0 +1,24 @@
+{% extends 'core/base_menu.html' %}
+{% load crispy_forms_tags %}
+{% block conteudo %}
+<div class="d-flex justify-content-center mb-5"></div>
+    <div class="card-produto-alterar">
+        <div class="card-header">
+            <h3>G & G COTAÇÕES</h3>
+            <h4>Produto</h4>
+        </div>
+        <div class="card-body">
+            <form id="formExemplo" data-toggle="validator" role="form" method="post">
+                <table class="table-sm table-responsive-sm">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                </table>
+                <button type="submit" class="btn btn-warning">
+                    <i class="far fa-save"></i> Salvar</button>
+                <a href="javascript:void(0)" onClick="history.go(-1); return false;" 
+                    class="btn btn-success"><i class="far fa-window-close"></i> Cancelar</a>       
+            </form>
+  </div>
+</div>
+{% endblock %}
+
